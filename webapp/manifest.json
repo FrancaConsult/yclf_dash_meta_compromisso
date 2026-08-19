@@ -1,0 +1,104 @@
+{
+  "_version": "1.32.0",
+  "sap.app": {
+    "id": "yclf.dash360.metacompromisso",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}"
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "fullWidth": true,
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.149.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.uxap": {},
+        "sap.ui.comp": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "yclf.dash360.metacompromisso.i18n.i18n",
+          "fallbackLocale": "",
+          "supportedLocales": [""]
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "yclf.dash360.metacompromisso.view",
+        "controlAggregation": "pages",
+        "controlId": "app"
+      },
+      "routes": [
+        {
+          "name": "Dashboard",
+          "pattern": "",
+          "target": "Dashboard"
+        },
+        {
+          "name": "FamilyDetail",
+          "pattern": "familia/{familyId}",
+          "target": "FamilyDetail"
+        },
+        {
+          "name": "SegmentDetail",
+          "pattern": "segmento/{segmentId}",
+          "target": "SegmentDetail"
+        }
+      ],
+      "targets": {
+        "Dashboard": {
+          "viewName": "Dashboard",
+          "viewLevel": 1
+        },
+        "FamilyDetail": {
+          "viewName": "FamilyDetail",
+          "viewLevel": 2
+        },
+        "SegmentDetail": {
+          "viewName": "SegmentDetail",
+          "viewLevel": 2
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "yclf.dash360.metacompromisso.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

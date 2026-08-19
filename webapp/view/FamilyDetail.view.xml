@@ -1,0 +1,127 @@
+<mvc:View
+    controllerName="yclf.dash360.metacompromisso.controller.FamilyDetail"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:uxap="sap.uxap">
+    <uxap:ObjectPageLayout
+        id="familyObjectPage"
+        class="appFullHeight"
+        showTitleInHeaderContent="true"
+        upperCaseAnchorBar="false">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:expandedHeading>
+                    <Title text="{detail>/family/name}" level="H1"/>
+                </uxap:expandedHeading>
+                <uxap:snappedHeading>
+                    <Title text="{detail>/family/name}" level="H2"/>
+                </uxap:snappedHeading>
+                <uxap:actions>
+                    <Button text="{i18n>back}" icon="sap-icon://nav-back" press=".onNavBack"/>
+                </uxap:actions>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+        <uxap:headerContent>
+            <ObjectStatus
+                title="{i18n>salesManager}"
+                text="{detail>/detail/salesManager}"
+                state="Information"
+                class="sapUiMediumMarginEnd"/>
+            <ObjectStatus
+                title="{i18n>salesTeam}"
+                text="{detail>/detail/salesTeam}"
+                class="sapUiMediumMarginEnd"/>
+            <ObjectStatus
+                title="{i18n>selectedFamily}"
+                text="{detail>/family/name}"
+                class="sapUiMediumMarginEnd"/>
+            <ObjectStatus
+                title="{i18n>quota}"
+                text="{path: 'detail>/family/budget', formatter: '.formatter.integer'}"
+                state="Success"
+                class="sapUiMediumMarginEnd"/>
+            <ObjectStatus
+                title="{i18n>commitment}"
+                text="{path: 'detail>/family/commitment', formatter: '.formatter.integer'}"
+                state="Information"
+                class="sapUiMediumMarginEnd"/>
+        </uxap:headerContent>
+        <uxap:sections>
+            <uxap:ObjectPageSection title="{i18n>targetVsQuantity}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection title="{i18n>consultantPerformance}">
+                        <uxap:blocks>
+                            <Table
+                                id="consultantsTable"
+                                items="{detail>/detail/consultants}"
+                                sticky="ColumnHeaders"
+                                alternateRowColors="true">
+                                <columns>
+                                    <Column width="15rem"><Text text="{i18n>consultant}"/></Column>
+                                    <Column hAlign="End"><ObjectStatus text="{i18n>quotaJune}" state="Success"/></Column>
+                                    <Column hAlign="End"><ObjectStatus text="{i18n>commitment}" state="Information"/></Column>
+                                    <Column hAlign="End"><Text text="{i18n>billed}"/></Column>
+                                    <Column hAlign="End"><Text text="{i18n>monthlyPortfolio}"/></Column>
+                                    <Column hAlign="End"><Text text="{i18n>achievement}"/></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem highlight="{path: 'detail>isTotal', formatter: '.formatter.rowHighlight'}">
+                                        <cells>
+                                            <ObjectIdentifier title="{detail>name}"/>
+                                            <ObjectNumber
+                                                number="{path: 'detail>budget', formatter: '.formatter.integer'}"
+                                                state="Success"/>
+                                            <ObjectNumber
+                                                number="{path: 'detail>commitment', formatter: '.formatter.integer'}"
+                                                state="Information"/>
+                                            <ObjectNumber
+                                                number="{path: 'detail>billed', formatter: '.formatter.currency'}"
+                                                unit="R$"/>
+                                            <ObjectNumber number="{path: 'detail>monthlyPortfolio', formatter: '.formatter.currency'}" unit="R$"/>
+                                            <ObjectStatus text="{path: 'detail>achievement', formatter: '.formatter.percentage'}" state="{= ${detail>achievement} >= 1 ? 'Success' : 'Warning' }"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection title="{i18n>orderCritiques}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection title="{i18n>orderCritiques}">
+                        <uxap:blocks>
+                            <ScrollContainer
+                                horizontal="true"
+                                vertical="false"
+                                width="100%">
+                                <Table
+                                    id="familyOrderCritiquesTable"
+                                    items="{detail>/detail/orderCritiques}"
+                                    sticky="ColumnHeaders"
+                                    alternateRowColors="true">
+                                    <columns>
+                                        <Column width="12rem"><Text text="{i18n>critique}"/></Column>
+                                        <Column width="8rem" hAlign="End"><Text text="{i18n>quantityShort}"/></Column>
+                                        <Column width="10rem" hAlign="End"><Text text="{i18n>value}"/></Column>
+                                        <Column width="8rem" hAlign="End"><Text text="{i18n>percentage}"/></Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem highlight="{path: 'detail>isTotal', formatter: '.formatter.rowHighlight'}">
+                                            <cells>
+                                                <Text text="{detail>name}"/>
+                                                <ObjectNumber number="{path: 'detail>quantity', formatter: '.formatter.dashWhenZeroInteger'}"/>
+                                                <ObjectNumber number="{path: 'detail>value', formatter: '.formatter.dashWhenZeroInteger'}" unit="R$"/>
+                                                <ObjectStatus text="{path: 'detail>percentage', formatter: '.formatter.percentage'}"/>
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+</mvc:View>

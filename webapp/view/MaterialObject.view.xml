@@ -1,0 +1,51 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns:m="sap.m"
+    controllerName="yclf.dash360.metacompromisso.controller.MaterialObject">
+
+    <ObjectPageLayout id="MaterialObjectPage" class="appFullHeight">
+        <headerTitle>
+			<ObjectPageHeader id="headerForTest"
+							  objectTitle="{= ${Material} + ' - ' + ${Type} }"
+							  objectSubtitle="{Description}"
+							  >
+			</ObjectPageHeader>
+		</headerTitle>
+        <sections>
+            <ObjectPageSection id="PlantSection" title="{i18n>PlantSectionText}">	
+				<subSections>
+					<ObjectPageSubSection id="PlantSubSection">
+						<blocks>
+							<m:Table width="100%" items="{ path: 'to_Plant'}" class="appObjectTable" autoPopinMode="true" contextualWidth="Auto">
+
+								<m:columns>
+									<m:Column importance="High"><m:Text text="{i18n>Plant}"/></m:Column>
+									<m:Column demandPopin="true" minScreenWidth="Tablet"><m:Text text="{i18n>ProcurementType}"/></m:Column>
+									<m:Column demandPopin="true" minScreenWidth="Tablet"><m:Text text="{i18n>PlantSpecificMaterialStatus}"/></m:Column>
+									<m:Column demandPopin="true" minScreenWidth="Tablet"><m:Text text="{i18n>BatchManagement}"/></m:Column>
+									<m:Column demandPopin="true" minScreenWidth="Desktop"><m:Text text="{i18n>MRP}"/></m:Column>
+								</m:columns>
+
+								<m:items>
+									<m:ColumnListItem>
+										<m:cells>
+											<m:Text text="{Plant}" />
+											<m:Text text="{ProcurementType}" />
+											<m:Text text="{PlantSpecificMaterialStatus}" />
+											<m:Text text="{BatchManagement}" />
+											<m:Text text="{MRPController}" />
+										</m:cells>
+									</m:ColumnListItem>
+								</m:items>
+
+							</m:Table>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+
+        </sections>
+    </ObjectPageLayout>
+</mvc:View>

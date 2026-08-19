@@ -1,0 +1,24 @@
+{
+  "generationParameters": {
+    "generationDate": "Mon Jan 12 2026 13:29:24 GMT-0300 (Brasilia Standard Time)",
+    "generatorPlatform": "Visual Studio Code",
+    "serviceType": "None",
+    "metadataFilename": "",
+    "serviceUrl": "",
+    "appName": "meta-compromisso",
+    "appTitle": "Relatório de Meta e Compromisso",
+    "appDescription": "Acompanhamento diário de metas, compromissos, faturamento e carteira.",
+    "appNamespace": "yclf.dash360",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.149.1",
+    "enableCodeAssist": false,
+    "enableEslint": false,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.20.0",
+    "template": "Basic V2",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}
