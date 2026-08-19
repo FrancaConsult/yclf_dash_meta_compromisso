@@ -1,0 +1,2 @@
+sap.ui.define(["yclf/dash360/metacompromisso/controller/Material.controller"],function(t){"use strict";QUnit.module("Material Controller");QUnit.test("I should test the Material controller",function(o){var e=new t;e.onInit();o.ok(e)})});
+//# sourceMappingURL=Material.controller.js.map

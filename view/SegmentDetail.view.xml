@@ -1,0 +1,135 @@
+<mvc:View
+    controllerName="yclf.dash360.metacompromisso.controller.SegmentDetail"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:uxap="sap.uxap">
+    <uxap:ObjectPageLayout
+        id="segmentObjectPage"
+        class="appFullHeight"
+        showTitleInHeaderContent="true"
+        upperCaseAnchorBar="false">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:expandedHeading>
+                    <Title text="{detail>/detail/title}" level="H1"/>
+                </uxap:expandedHeading>
+                <uxap:snappedHeading>
+                    <Title text="{detail>/detail/title}" level="H2"/>
+                </uxap:snappedHeading>
+                <uxap:actions>
+                    <Button text="{i18n>back}" icon="sap-icon://nav-back" press=".onNavBack"/>
+                </uxap:actions>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+        <uxap:headerContent>
+            <ObjectStatus
+                title="{i18n>selectedSegment}"
+                text="{detail>/segment/name}"
+                state="Information"
+                class="sapUiSmallMarginEnd"/>
+            <ObjectStatus
+                title="{i18n>salesManager}"
+                text="{detail>/detail/salesManager}"
+                class="sapUiSmallMarginEnd"/>
+            <ObjectStatus
+                title="{i18n>salesTeam}"
+                text="{detail>/detail/salesTeam}"
+                class="sapUiSmallMarginEnd"/>
+        </uxap:headerContent>
+        <uxap:sections>
+            <uxap:ObjectPageSection title="{i18n>dailyTracking}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection title="{i18n>consultantPerformance}">
+                        <uxap:blocks>
+                            <ScrollContainer
+                                horizontal="true"
+                                vertical="false"
+                                width="100%">
+                                <Table
+                                    id="segmentConsultantsTable"
+                                    items="{detail>/detail/consultants}"
+                                    sticky="ColumnHeaders"
+                                    alternateRowColors="true">
+                                    <columns>
+                                        <Column width="15rem"><Text text="{i18n>consultant}"/></Column>
+                                        <Column width="9rem" hAlign="End"><ObjectStatus text="{i18n>quotaJune}" state="Success"/></Column>
+                                        <Column width="10rem" hAlign="End"><ObjectStatus text="{i18n>commitmentJune}" state="Information"/></Column>
+                                        <Column width="10rem" hAlign="End"><Text text="{i18n>accumulatedOrders}"/></Column>
+                                        <Column width="9rem" hAlign="End"><Text text="{i18n>dayEntry}"/></Column>
+                                        <Column width="10rem" hAlign="End"><Text text="{i18n>monthlyPortfolio}"/></Column>
+                                        <Column width="10rem" hAlign="End"><Text text="{i18n>remittancePortfolio}"/></Column>
+                                        <Column width="10rem" hAlign="End"><Text text="{i18n>billed}"/></Column>
+                                        <Column width="9rem" hAlign="End"><Text text="{i18n>achievement}"/></Column>
+                                        <Column width="11rem" hAlign="End"><Text text="{i18n>totalMonthBalance}"/></Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem highlight="{path: 'detail>isTotal', formatter: '.formatter.rowHighlight'}">
+                                            <cells>
+                                                <ObjectIdentifier title="{detail>name}"/>
+                                                <ObjectNumber
+                                                    number="{path: 'detail>quotaJune', formatter: '.formatter.currency'}"
+                                                    unit="R$"
+                                                    state="Success"/>
+                                                <ObjectNumber
+                                                    number="{path: 'detail>commitmentJune', formatter: '.formatter.currency'}"
+                                                    unit="R$"
+                                                    state="Information"/>
+                                                <ObjectNumber number="{path: 'detail>accumulatedOrders', formatter: '.formatter.currency'}" unit="R$"/>
+                                                <ObjectNumber number="{path: 'detail>dayEntry', formatter: '.formatter.currency'}" unit="R$"/>
+                                                <ObjectNumber number="{path: 'detail>monthlyPortfolio', formatter: '.formatter.currency'}" unit="R$"/>
+                                                <ObjectNumber number="{path: 'detail>remittancePortfolio', formatter: '.formatter.currency'}" unit="R$"/>
+                                                <ObjectNumber
+                                                    number="{path: 'detail>billed', formatter: '.formatter.currency'}"
+                                                    unit="R$"/>
+                                                <ObjectStatus text="{path: 'detail>fatCartComp', formatter: '.formatter.percentage'}" state="{= ${detail>fatCartComp} >= 1 ? 'Success' : 'Warning' }"/>
+                                                <ObjectNumber
+                                                    number="{path: 'detail>totalMonthBalance', formatter: '.formatter.currency'}"
+                                                    unit="R$"
+                                                    state="{path: 'detail>totalMonthBalance', formatter: '.formatter.balanceState'}"/>
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection title="{i18n>orderCritiques}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection title="{i18n>orderCritiques}">
+                        <uxap:blocks>
+                            <ScrollContainer
+                                horizontal="true"
+                                vertical="false"
+                                width="100%">
+                                <Table
+                                    id="segmentOrderCritiquesTable"
+                                    items="{detail>/detail/orderCritiques}"
+                                    sticky="ColumnHeaders"
+                                    alternateRowColors="true">
+                                    <columns>
+                                        <Column width="12rem"><Text text="{i18n>critique}"/></Column>
+                                        <Column width="8rem" hAlign="End"><Text text="{i18n>quantityShort}"/></Column>
+                                        <Column width="10rem" hAlign="End"><Text text="{i18n>value}"/></Column>
+                                        <Column width="8rem" hAlign="End"><Text text="{i18n>percentage}"/></Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem highlight="{path: 'detail>isTotal', formatter: '.formatter.rowHighlight'}">
+                                            <cells>
+                                                <Text text="{detail>name}"/>
+                                                <ObjectNumber number="{path: 'detail>quantity', formatter: '.formatter.dashWhenZeroInteger'}"/>
+                                                <ObjectNumber number="{path: 'detail>value', formatter: '.formatter.dashWhenZeroInteger'}" unit="R$"/>
+                                                <ObjectStatus text="{path: 'detail>percentage', formatter: '.formatter.percentage'}"/>
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+</mvc:View>

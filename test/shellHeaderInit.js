@@ -1,0 +1,2 @@
+sap.ui.require(["sap/ui/core/Element"],function(e){"use strict";var i=120;function n(){var t=e.getElementById("shell-header");if(t){t.addStyleClass("sapUiResponsiveContentPadding");return}i-=1;if(i>0){window.requestAnimationFrame(n)}}n()});
+//# sourceMappingURL=shellHeaderInit.js.map

@@ -1,0 +1,149 @@
+html,
+body,
+body > div,
+#container,
+#container-uiarea {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.appFullHeight,
+.appFullHeight > .sapFDynamicPage,
+.appFullHeight > .sapUxAPObjectPageLayout {
+    min-height: 100%;
+}
+
+.appResponsiveBlock.sapUiResponsiveMargin {
+    width: auto !important;
+}
+
+.appResponsiveBlock,
+.appObjectTable {
+    max-width: 100%;
+}
+
+.dashboardPage .sapFDynamicPageContent,
+.dashboardPage .sapFDynamicPageContentFitContainer {
+    background: var(--sapBackgroundColor, #f5f6f7);
+    padding: 1rem 1.75rem 1.75rem;
+}
+
+.dashboardPage,
+.dashboardPage .sapFDynamicPageContentWrapper {
+    background: var(--sapBackgroundColor, #f5f6f7);
+}
+
+.dashboardFilterHeader.sapFDynamicPageHeader {
+    background: var(--sapGroup_ContentBackground);
+    border-bottom: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+    box-shadow: none;
+    padding: 0;
+    position: relative;
+}
+
+.dashboardFilterHeader .sapUiCompFilterBar,
+.dashboardFilterHeader .sapUiCompFilterBarContent {
+    background: var(--sapGroup_ContentBackground);
+}
+
+.dashboardHeaderActions {
+    bottom: -0.75rem;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+    width: auto;
+    z-index: 3;
+}
+
+.dashboardHeaderActionButton.sapMBtn {
+    height: 1.625rem;
+    padding: 0 0.125rem;
+}
+
+.dashboardHeaderActionButton .sapMBtnInner {
+    height: 1.5rem;
+    min-width: 1.5rem;
+    padding: 0;
+    width: 1.5rem;
+}
+
+.dashboardContent {
+    width: 100%;
+    background: transparent;
+}
+
+.dashboardTableCard {
+    overflow: hidden;
+    width: 100%;
+    background: var(--sapTile_Background, #fff);
+    border: 0.0625rem solid var(--sapGroup_ContentBorderColor, #d9d9d9);
+    border-radius: 0.75rem;
+    box-shadow: 0 0.125rem 0.5rem rgb(34 53 72 / 12%);
+}
+
+.dashboardTableCard .sapMListTbl,
+.dashboardTableCard .sapMListTblHeader,
+.dashboardTableCard .sapMTB {
+    background: var(--sapTile_Background, #fff);
+}
+
+.dashboardTableToolbar {
+    border-bottom: none;
+    padding: 0 1rem;
+}
+
+.dashboardTableToolbar .sapMTitle {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.segmentManagementGroupHeader > .sapMListTblCell,
+.segmentManagementGroupHeader.sapMGHLI {
+    background: #b8c0c8;
+    border-top: 0.0625rem solid #6f7a85;
+    border-bottom: 0.0625rem solid #6f7a85;
+}
+
+.segmentManagementGroupHeader .sapMGHLITitle {
+    color: #0b1f33;
+    font-weight: 700;
+}
+
+.commitmentColumnHeader.sapMText {
+    color: #0a6ed1;
+    font-weight: 700;
+}
+
+.billedColumnHeader.sapMText {
+    color: #107e3e;
+    font-weight: 700;
+}
+
+.billedValue.sapMObjectNumber,
+.billedValue .sapMObjectNumberText,
+.billedValue .sapMObjectNumberUnit,
+.billedValue .sapMObjStatusText {
+    color: #107e3e !important;
+}
+
+.sapMListTblCell .sapMText,
+.sapMListTblCell .sapMObjectIdentifier {
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 599px) {
+    .dashboardPage .sapFDynamicPageContent,
+    .dashboardPage .sapFDynamicPageContentFitContainer {
+        padding: 0.5rem;
+    }
+
+    .dashboardTableCard {
+        border-radius: 0.5rem;
+    }
+
+    .appResponsiveBlock.sapUiResponsiveMargin {
+        margin-left: 0.5rem !important;
+        margin-right: 0.5rem !important;
+    }
+}

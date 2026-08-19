@@ -1,0 +1,217 @@
+<mvc:View
+    controllerName="yclf.dash360.metacompromisso.controller.Dashboard"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:mvc="sap.ui.core.mvc">
+    <f:DynamicPage
+        id="dashboardPage"
+        class="appFullHeight dashboardPage"
+        busy="{view>/busy}"
+        headerExpanded="true"
+        preserveHeaderStateOnScroll="false"
+        showFooter="false">
+        <f:header>
+            <f:DynamicPageHeader
+                class="dashboardFilterHeader sapUiNoContentPadding sapUiNoMarginTop sapUiAlignTop"
+                pinnable="true">
+                <HBox
+                    width="100%"
+                    renderType="Bare"
+                    alignItems="Start"
+                    justifyContent="Start"
+                    class="sapUiNoMarginTop sapUiNoMarginBottom sapUiAlignTop">
+                    <VBox width="2.45rem" renderType="Bare"/>
+                    <VBox
+                        width="100%"
+                        renderType="Bare"
+                        alignItems="Stretch"
+                        justifyContent="Start"
+                        class="sapUiNoMarginTop sapUiNoMarginBottom sapUiAlignTop">
+                        <layoutData>
+                            <FlexItemData growFactor="1" baseSize="0"/>
+                        </layoutData>
+                        <fb:FilterBar
+                            id="filterBar"
+                            persistencyKey="dashboardFilterBar"
+                            header="{i18n>standardVariant}"
+                            showGoOnFB="true"
+                            showClearOnFB="true"
+                            search=".onSearch"
+                            clear=".onResetFilters"
+                            useToolbar="true">
+                            <fb:filterGroupItems>
+                                <fb:FilterGroupItem
+                                    groupName="basic"
+                                    name="salesTeam"
+                                    label="{i18n>salesTeam}"
+                                    visibleInFilterBar="true">
+                                    <fb:control>
+                                        <Select
+                                            id="salesTeamFilter"
+                                            selectedKey="{view>/filters/salesTeam}"
+                                            items="{business>/salesTeams}">
+                                            <core:Item key="{business>id}" text="{business>name}"/>
+                                        </Select>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                                <fb:FilterGroupItem
+                                    groupName="basic"
+                                    name="salesOffice"
+                                    label="{i18n>salesOffice}"
+                                    visibleInFilterBar="true">
+                                    <fb:control>
+                                        <MultiComboBox
+                                            id="salesOfficeFilter"
+                                            selectedKeys="{view>/filters/salesOffices}"
+                                            showSelectAll="true"
+                                            showSecondaryValues="true"
+                                            items="{business>/salesOffices}">
+                                            <core:ListItem
+                                                key="{business>id}"
+                                                text="{business>name}"
+                                                additionalText="{business>id}"/>
+                                        </MultiComboBox>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                                <fb:FilterGroupItem
+                                    groupName="basic"
+                                    name="dateRange"
+                                    label="{i18n>dateRange}"
+                                    visibleInFilterBar="true">
+                                    <fb:control>
+                                        <DateRangeSelection
+                                            id="dateRangeFilter"
+                                            value="{view>/filters/dateRange}"
+                                            valueFormat="yyyy-MM-dd"
+                                            displayFormat="medium"
+                                            delimiter=" - "
+                                            change=".onDateRangeChange"/>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                            </fb:filterGroupItems>
+                        </fb:FilterBar>
+                    </VBox>
+                    <VBox width="2.45rem" renderType="Bare"/>
+                </HBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <VBox class="dashboardContent">
+                <VBox class="dashboardTableCard sapUiSmallMarginBottom">
+                    <Table
+                        id="segmentsTable"
+                        items="{
+                            path: 'business>/segments',
+                            sorter: {
+                                path: 'managementOrder',
+                                group: true
+                            },
+                            groupHeaderFactory: '.getSegmentGroupHeader'
+                        }"
+                        growing="false"
+                        alternateRowColors="true"
+                        sticky="ColumnHeaders"
+                        noDataText="{i18n>noData}">
+                        <headerToolbar>
+                            <OverflowToolbar class="dashboardTableToolbar">
+                                <Title text="{i18n>dailyTracking}" level="H2"/>
+                                <ToolbarSpacer/>
+                                <ObjectStatus
+                                    icon="sap-icon://date-time"
+                                    text="{parts: ['i18n>updatedUntil', 'view>/filters/endDate'], formatter: '.formatter.updatedAt'}"/>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                    <columns>
+                        <Column width="14rem"><Text text="{i18n>segment}"/></Column>
+                        <Column hAlign="End"><ObjectStatus text="{i18n>budget}" state="Success"/></Column>
+                        <Column hAlign="End"><ObjectStatus text="{i18n>commitment}" state="Information"/></Column>
+                        <Column hAlign="End"><Text text="{i18n>billed}"/></Column>
+                        <Column hAlign="End"><Text text="{i18n>monthlyPortfolio}"/></Column>
+                        <Column hAlign="End"><Text text="{i18n>portfolioAndBilled}"/></Column>
+                        <Column hAlign="End"><Text text="{i18n>balance}"/></Column>
+                        <Column width="3rem" hAlign="Center"><Text text=""/></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem
+                            type="Inactive"
+                            highlight="{path: 'business>isTotal', formatter: '.formatter.rowHighlight'}">
+                            <cells>
+                                <Text text="{business>name}"/>
+                                <ObjectNumber
+                                    number="{path: 'business>budget', formatter: '.formatter.currency'}"
+                                    unit="R$"
+                                    state="Success"/>
+                                <ObjectNumber
+                                    number="{path: 'business>commitment', formatter: '.formatter.currency'}"
+                                    unit="R$"
+                                    state="Information"/>
+                                <ObjectNumber
+                                    number="{path: 'business>billed', formatter: '.formatter.currency'}"
+                                    unit="R$"/>
+                                <ObjectNumber number="{path: 'business>monthlyPortfolio', formatter: '.formatter.currency'}" unit="R$"/>
+                                <ObjectNumber number="{path: 'business>portfolioAndBilled', formatter: '.formatter.currency'}" unit="R$"/>
+                                <ObjectNumber
+                                    number="{path: 'business>balance', formatter: '.formatter.currency'}"
+                                    unit="R$"
+                                    state="{path: 'business>balance', formatter: '.formatter.balanceState'}"/>
+                                <Button
+                                    type="Transparent"
+                                    icon="sap-icon://navigation-right-arrow"
+                                    visible="{= !${business>isTotal} }"
+                                    press=".onSegmentPress"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                    </Table>
+                </VBox>
+
+                <VBox class="dashboardTableCard">
+                    <Table
+                        id="familiesTable"
+                        items="{business>/families}"
+                        alternateRowColors="true"
+                        sticky="ColumnHeaders"
+                        noDataText="{i18n>noData}">
+                        <headerToolbar>
+                            <OverflowToolbar class="dashboardTableToolbar">
+                                <Title text="{i18n>familyQuantityTarget}" level="H2"/>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                    <columns>
+                        <Column width="14rem"><Text text="{i18n>family}"/></Column>
+                        <Column hAlign="End"><ObjectStatus text="{i18n>quota}" state="Success"/></Column>
+                        <Column hAlign="End"><ObjectStatus text="{i18n>commitmentQuantity}" state="Information"/></Column>
+                        <Column hAlign="End"><Text text="{i18n>billedQuantity}"/></Column>
+                        <Column hAlign="End"><Text text="{i18n>portfolioQuantity}"/></Column>
+                        <Column hAlign="End"><Text text="{i18n>portfolioAndBilledQuantity}"/></Column>
+                        <Column hAlign="End"><Text text="{i18n>achievement}"/></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem
+                            type="{= ${business>isTotal} ? 'Inactive' : 'Navigation' }"
+                            press=".onFamilyPress"
+                            highlight="{path: 'business>isTotal', formatter: '.formatter.rowHighlight'}">
+                            <cells>
+                                <Text text="{business>name}"/>
+                                <ObjectNumber
+                                    number="{path: 'business>budget', formatter: '.formatter.integer'}"
+                                    state="Success"/>
+                                <ObjectNumber
+                                    number="{path: 'business>commitment', formatter: '.formatter.integer'}"
+                                    state="Information"/>
+                                <ObjectNumber
+                                    number="{path: 'business>billed', formatter: '.formatter.integer'}"/>
+                                <ObjectNumber number="{path: 'business>monthlyPortfolio', formatter: '.formatter.integer'}"/>
+                                <ObjectNumber number="{path: 'business>portfolioAndBilled', formatter: '.formatter.integer'}"/>
+                                <ObjectStatus text="{path: 'business>achievement', formatter: '.formatter.percentage'}" state="{= ${business>achievement} >= 1 ? 'Success' : 'Warning' }"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                    </Table>
+                </VBox>
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

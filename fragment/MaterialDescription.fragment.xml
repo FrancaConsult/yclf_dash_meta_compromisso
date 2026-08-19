@@ -1,0 +1,7 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    
+    <SelectDialog id="MaterialDescriptionInputHelp" class="sapUiPopupWithPadding" items="{/Z_I_MaterialDescription}" search="onHandleMatDescriptionVHSearch" confirm="onHandleConfirmMatDesc">
+        <StandardListItem id="ListItemMatDescriptionInputHelp" title="{Material}" description="{Description}" />
+    </SelectDialog>
+    
+</core:FragmentDefinition>

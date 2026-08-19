@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/test/opaQunit","./pages/Dashboard"],function(a){"use strict";QUnit.module("Jornada do dashboard");a("Exibe o relatório e navega para o detalhe",function(a,e,o){a.iStartMyApp();o.onTheDashboard.iShouldSeeTheDashboard();e.onTheDashboard.iPressTheFirstFamily();o.onTheDashboard.iShouldSeeTheFamilyDetail();o.iTeardownMyApp()})});
+//# sourceMappingURL=NavigationJourney.js.map

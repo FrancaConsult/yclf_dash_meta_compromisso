@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/model/json/JSONModel","sap/ui/Device","yclf/dash360/metacompromisso/service/ReportService"],function(e,t,i){"use strict";return{createDeviceModel:function(){var i=new e(t);i.setDefaultBindingMode("OneWay");return i},createViewModel:function(){return new e({busy:true,filters:{salesTeam:"",salesOffices:[],dateRange:"2026-06-01 - 2026-06-12",startDate:"2026-06-01",endDate:"2026-06-12"},selectedFamily:{}})},createBusinessModel:function(){var t=new e;t.setSizeLimit(1e3);i.load(t);return t}}});
+//# sourceMappingURL=models.js.map
