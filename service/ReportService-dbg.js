@@ -2,7 +2,7 @@ sap.ui.define([], function () {
     "use strict";
 
     var STORAGE_KEY = "yclf.meta.compromisso.mock.v4";
-    var BUSINESS_FIELDS = ["budget", "commitment", "billed", "monthlyPortfolio"];
+    var BUSINESS_FIELDS = ["budget", "billed", "monthlyPortfolio"];
     var SALES_OFFICES_BY_SEGMENT = {
         "01": ["0031", "0033", "0042", "0121", "0141", "0142", "0143", "0144", "0147"],
         "02": ["0030", "0038", "0037", "0042", "0129", "0155", "0166", "0171", "0203"],
@@ -51,9 +51,9 @@ sap.ui.define([], function () {
     function calculateRow(row) {
         var calculated = Object.assign({}, row);
         calculated.portfolioAndBilled = toNumber(row.monthlyPortfolio) + toNumber(row.billed);
-        calculated.balance = calculated.portfolioAndBilled - toNumber(row.commitment);
-        calculated.achievement = toNumber(row.commitment) ?
-            calculated.portfolioAndBilled / toNumber(row.commitment) : 0;
+        calculated.balance = calculated.portfolioAndBilled - toNumber(row.budget);
+        calculated.achievement = toNumber(row.budget) ?
+            calculated.portfolioAndBilled / toNumber(row.budget) : 0;
         calculated.managementOrder = calculated.management === "GNI" ? 2 : 1;
         return calculated;
     }
@@ -76,7 +76,6 @@ sap.ui.define([], function () {
             id: "TOTAL",
             name: label,
             budget: 0,
-            commitment: 0,
             billed: 0,
             monthlyPortfolio: 0,
             portfolioAndBilled: 0,
@@ -85,7 +84,7 @@ sap.ui.define([], function () {
         });
         total.management = "GNI";
         total.managementOrder = 2;
-        total.achievement = total.commitment ? total.portfolioAndBilled / total.commitment : 0;
+        total.achievement = total.budget ? total.portfolioAndBilled / total.budget : 0;
         return total;
     }
 
@@ -93,13 +92,12 @@ sap.ui.define([], function () {
         var calculated = calculateRow(row);
         calculated.previousMonthPortfolio = toNumber(row.previousMonthPortfolio);
         calculated.quotaJune = toNumber(row.quotaJune);
-        calculated.commitmentJune = toNumber(row.commitmentJune);
         calculated.accumulatedOrders = toNumber(row.accumulatedOrders);
         calculated.dayEntry = toNumber(row.dayEntry);
         calculated.remittancePortfolio = toNumber(row.remittancePortfolio);
         calculated.totalMonthBalance = calculated.portfolioAndBilled -
             calculated.previousMonthPortfolio -
-            calculated.commitmentJune;
+            calculated.quotaJune;
         calculated.fatCartComp = calculated.achievement;
         return calculated;
     }
@@ -109,7 +107,6 @@ sap.ui.define([], function () {
             [
                 "previousMonthPortfolio",
                 "quotaJune",
-                "commitmentJune",
                 "accumulatedOrders",
                 "dayEntry",
                 "monthlyPortfolio",
@@ -126,7 +123,6 @@ sap.ui.define([], function () {
             name: label,
             previousMonthPortfolio: 0,
             quotaJune: 0,
-            commitmentJune: 0,
             accumulatedOrders: 0,
             dayEntry: 0,
             monthlyPortfolio: 0,
@@ -136,8 +132,8 @@ sap.ui.define([], function () {
             totalMonthBalance: 0,
             isTotal: true
         });
-        total.achievement = total.commitmentJune ?
-            total.portfolioAndBilled / total.commitmentJune : 0;
+        total.achievement = total.quotaJune ?
+            total.portfolioAndBilled / total.quotaJune : 0;
         total.fatCartComp = total.achievement;
         return total;
     }
@@ -202,12 +198,10 @@ sap.ui.define([], function () {
                         id: consultant.id,
                         name: consultant.name,
                         budget: Math.round(segment.budget * consultant.share),
-                        commitment: Math.round(segment.commitment * consultant.share),
                         billed: billed,
                         monthlyPortfolio: monthlyPortfolio,
                         previousMonthPortfolio: Math.round(monthlyPortfolio * (0.62 + consultantIndex * 0.03)),
                         quotaJune: Math.round(segment.budget * consultant.share),
-                        commitmentJune: Math.round(segment.commitment * consultant.share),
                         accumulatedOrders: Math.round((billed + monthlyPortfolio) * (0.48 + consultantIndex * 0.04)),
                         dayEntry: Math.round((billed + monthlyPortfolio) * (0.18 + consultantIndex * 0.012)),
                         remittancePortfolio: Math.round(monthlyPortfolio * (0.12 + consultantIndex * 0.015))
@@ -244,7 +238,6 @@ sap.ui.define([], function () {
                         id: consultant.id,
                         name: consultant.name,
                         budget: Math.round(family.budget * consultant.share),
-                        commitment: Math.round(family.commitment * consultant.share),
                         billed: Math.round(family.billed * consultant.share * factor),
                         monthlyPortfolio: Math.round(family.monthlyPortfolio * consultant.share)
                     };
