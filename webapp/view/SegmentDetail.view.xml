@@ -53,7 +53,6 @@
                                     <columns>
                                         <Column width="15rem"><Text text="{i18n>consultant}"/></Column>
                                         <Column width="9rem" hAlign="End"><ObjectStatus text="{i18n>quotaJune}" state="Success"/></Column>
-                                        <Column width="10rem" hAlign="End"><ObjectStatus text="{i18n>commitmentJune}" state="Information"/></Column>
                                         <Column width="10rem" hAlign="End"><Text text="{i18n>accumulatedOrders}"/></Column>
                                         <Column width="9rem" hAlign="End"><Text text="{i18n>dayEntry}"/></Column>
                                         <Column width="10rem" hAlign="End"><Text text="{i18n>monthlyPortfolio}"/></Column>
@@ -67,13 +66,9 @@
                                             <cells>
                                                 <ObjectIdentifier title="{detail>name}"/>
                                                 <ObjectNumber
-                                                    number="{path: 'detail>quotaJune', formatter: '.formatter.currency'}"
-                                                    unit="R$"
-                                                    state="Success"/>
-                                                <ObjectNumber
-                                                    number="{path: 'detail>commitmentJune', formatter: '.formatter.currency'}"
-                                                    unit="R$"
-                                                    state="Information"/>
+                                                number="{path: 'detail>quotaJune', formatter: '.formatter.currency'}"
+                                                unit="R$"
+                                                state="Success"/>
                                                 <ObjectNumber number="{path: 'detail>accumulatedOrders', formatter: '.formatter.currency'}" unit="R$"/>
                                                 <ObjectNumber number="{path: 'detail>dayEntry', formatter: '.formatter.currency'}" unit="R$"/>
                                                 <ObjectNumber number="{path: 'detail>monthlyPortfolio', formatter: '.formatter.currency'}" unit="R$"/>
