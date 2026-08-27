@@ -13,8 +13,14 @@ sap.ui.define([
         },
 
         createViewModel: function () {
+            var urlParameters = new URLSearchParams(window.location.search);
+            var showCommitment = urlParameters.get("showCommitment") !== "false";
+
             return new JSONModel({
                 busy: true,
+                authorization: {
+                    showCommitment: showCommitment
+                },
                 filters: {
                     salesTeam: "",
                     salesOffices: [],

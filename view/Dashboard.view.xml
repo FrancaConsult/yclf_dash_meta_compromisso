@@ -182,11 +182,13 @@
                     <columns>
                         <Column width="14rem"><Text text="{i18n>family}"/></Column>
                         <Column hAlign="End"><ObjectStatus text="{i18n>quota}" state="Success"/></Column>
-                        <Column hAlign="End"><ObjectStatus text="{i18n>commitmentQuantity}" state="Information"/></Column>
+                        <Column hAlign="End" visible="{view>/authorization/showCommitment}"><ObjectStatus text="{i18n>commitmentQuantity}" state="Information"/></Column>
                         <Column hAlign="End"><Text text="{i18n>billedQuantity}"/></Column>
                         <Column hAlign="End"><Text text="{i18n>portfolioQuantity}"/></Column>
                         <Column hAlign="End"><Text text="{i18n>portfolioAndBilledQuantity}"/></Column>
-                        <Column hAlign="End"><Text text="{i18n>achievement}"/></Column>
+                        <Column hAlign="End">
+                            <Text text="{parts: [{path: 'i18n>achievementVsCommitment'}, {path: 'i18n>achievementVsBudget'}, {path: 'view>/authorization/showCommitment'}], formatter: '.formatter.authorizationText'}"/>
+                        </Column>
                     </columns>
                     <items>
                         <ColumnListItem
@@ -200,12 +202,15 @@
                                     state="Success"/>
                                 <ObjectNumber
                                     number="{path: 'business>commitment', formatter: '.formatter.integer'}"
-                                    state="Information"/>
+                                    state="Information"
+                                    visible="{view>/authorization/showCommitment}"/>
                                 <ObjectNumber
                                     number="{path: 'business>billed', formatter: '.formatter.integer'}"/>
                                 <ObjectNumber number="{path: 'business>monthlyPortfolio', formatter: '.formatter.integer'}"/>
                                 <ObjectNumber number="{path: 'business>portfolioAndBilled', formatter: '.formatter.integer'}"/>
-                                <ObjectStatus text="{path: 'business>achievement', formatter: '.formatter.percentage'}" state="{= ${business>achievement} >= 1 ? 'Success' : 'Warning' }"/>
+                                <ObjectStatus
+                                    text="{parts: [{path: 'business>achievementVsCommitment'}, {path: 'business>achievementVsBudget'}, {path: 'view>/authorization/showCommitment'}], formatter: '.formatter.authorizationPercentage'}"
+                                    state="{parts: [{path: 'business>achievementVsCommitment'}, {path: 'business>achievementVsBudget'}, {path: 'view>/authorization/showCommitment'}], formatter: '.formatter.authorizationPercentageState'}"/>
                             </cells>
                         </ColumnListItem>
                     </items>
