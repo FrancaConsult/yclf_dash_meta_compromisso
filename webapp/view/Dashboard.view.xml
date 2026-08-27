@@ -126,6 +126,7 @@
                     <columns>
                         <Column width="14rem"><Text text="{i18n>segment}"/></Column>
                         <Column hAlign="End"><ObjectStatus text="{i18n>budget}" state="Success"/></Column>
+                        <Column hAlign="End"><ObjectStatus text="{i18n>commitment}" state="Information"/></Column>
                         <Column hAlign="End"><Text text="{i18n>billed}"/></Column>
                         <Column hAlign="End"><Text text="{i18n>monthlyPortfolio}"/></Column>
                         <Column hAlign="End"><Text text="{i18n>portfolioAndBilled}"/></Column>
@@ -142,6 +143,10 @@
                                     number="{path: 'business>budget', formatter: '.formatter.currency'}"
                                     unit="R$"
                                     state="Success"/>
+                                <ObjectNumber
+                                    number="{path: 'business>commitment', formatter: '.formatter.currency'}"
+                                    unit="R$"
+                                    state="Information"/>
                                 <ObjectNumber
                                     number="{path: 'business>billed', formatter: '.formatter.currency'}"
                                     unit="R$"/>
@@ -177,6 +182,7 @@
                     <columns>
                         <Column width="14rem"><Text text="{i18n>family}"/></Column>
                         <Column hAlign="End"><ObjectStatus text="{i18n>quota}" state="Success"/></Column>
+                        <Column hAlign="End"><ObjectStatus text="{i18n>commitmentQuantity}" state="Information"/></Column>
                         <Column hAlign="End"><Text text="{i18n>billedQuantity}"/></Column>
                         <Column hAlign="End"><Text text="{i18n>portfolioQuantity}"/></Column>
                         <Column hAlign="End"><Text text="{i18n>portfolioAndBilledQuantity}"/></Column>
@@ -192,6 +198,9 @@
                                 <ObjectNumber
                                     number="{path: 'business>budget', formatter: '.formatter.integer'}"
                                     state="Success"/>
+                                <ObjectNumber
+                                    number="{path: 'business>commitment', formatter: '.formatter.integer'}"
+                                    state="Information"/>
                                 <ObjectNumber
                                     number="{path: 'business>billed', formatter: '.formatter.integer'}"/>
                                 <ObjectNumber number="{path: 'business>monthlyPortfolio', formatter: '.formatter.integer'}"/>

@@ -40,6 +40,11 @@
                 text="{path: 'detail>/family/budget', formatter: '.formatter.integer'}"
                 state="Success"
                 class="sapUiMediumMarginEnd"/>
+            <ObjectStatus
+                title="{i18n>commitment}"
+                text="{path: 'detail>/family/commitment', formatter: '.formatter.integer'}"
+                state="Information"
+                class="sapUiMediumMarginEnd"/>
         </uxap:headerContent>
         <uxap:sections>
             <uxap:ObjectPageSection title="{i18n>targetVsQuantity}">
@@ -54,6 +59,7 @@
                                 <columns>
                                     <Column width="15rem"><Text text="{i18n>consultant}"/></Column>
                                     <Column hAlign="End"><ObjectStatus text="{i18n>quotaJune}" state="Success"/></Column>
+                                    <Column hAlign="End"><ObjectStatus text="{i18n>commitment}" state="Information"/></Column>
                                     <Column hAlign="End"><Text text="{i18n>billed}"/></Column>
                                     <Column hAlign="End"><Text text="{i18n>monthlyPortfolio}"/></Column>
                                     <Column hAlign="End"><Text text="{i18n>achievement}"/></Column>
@@ -66,8 +72,12 @@
                                                 number="{path: 'detail>budget', formatter: '.formatter.integer'}"
                                                 state="Success"/>
                                             <ObjectNumber
-                                                number="{path: 'detail>billed', formatter: '.formatter.integer'}"/>
-                                            <ObjectNumber number="{path: 'detail>monthlyPortfolio', formatter: '.formatter.integer'}"/>
+                                                number="{path: 'detail>commitment', formatter: '.formatter.integer'}"
+                                                state="Information"/>
+                                            <ObjectNumber
+                                                number="{path: 'detail>billed', formatter: '.formatter.currency'}"
+                                                unit="R$"/>
+                                            <ObjectNumber number="{path: 'detail>monthlyPortfolio', formatter: '.formatter.currency'}" unit="R$"/>
                                             <ObjectStatus text="{path: 'detail>achievement', formatter: '.formatter.percentage'}" state="{= ${detail>achievement} >= 1 ? 'Success' : 'Warning' }"/>
                                         </cells>
                                     </ColumnListItem>
