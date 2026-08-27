@@ -51,6 +51,18 @@ sap.ui.define([
             return percentFormat.format(Number(value) || 0);
         },
 
+        authorizationPercentage: function (commitmentValue, budgetValue, showCommitment) {
+            return percentFormat.format(Number(showCommitment ? commitmentValue : budgetValue) || 0);
+        },
+
+        authorizationText: function (internalText, externalText, showCommitment) {
+            return showCommitment ? internalText : externalText;
+        },
+
+        authorizationPercentageState: function (commitmentValue, budgetValue, showCommitment) {
+            return Number(showCommitment ? commitmentValue : budgetValue) >= 1 ? "Success" : "Warning";
+        },
+
         balanceState: function (value) {
             return Number(value) < 0 ? "Error" : "Success";
         },

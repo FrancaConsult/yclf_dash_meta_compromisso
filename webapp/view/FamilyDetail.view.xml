@@ -44,6 +44,7 @@
                 title="{i18n>commitment}"
                 text="{path: 'detail>/family/commitment', formatter: '.formatter.integer'}"
                 state="Information"
+                visible="{view>/authorization/showCommitment}"
                 class="sapUiMediumMarginEnd"/>
         </uxap:headerContent>
         <uxap:sections>
@@ -59,10 +60,12 @@
                                 <columns>
                                     <Column width="15rem"><Text text="{i18n>consultant}"/></Column>
                                     <Column hAlign="End"><ObjectStatus text="{i18n>quotaJune}" state="Success"/></Column>
-                                    <Column hAlign="End"><ObjectStatus text="{i18n>commitment}" state="Information"/></Column>
+                                    <Column hAlign="End" visible="{view>/authorization/showCommitment}"><ObjectStatus text="{i18n>commitment}" state="Information"/></Column>
                                     <Column hAlign="End"><Text text="{i18n>billed}"/></Column>
                                     <Column hAlign="End"><Text text="{i18n>monthlyPortfolio}"/></Column>
-                                    <Column hAlign="End"><Text text="{i18n>achievement}"/></Column>
+                                    <Column hAlign="End">
+                                        <Text text="{parts: [{path: 'i18n>achievementVsCommitment'}, {path: 'i18n>achievementVsBudget'}, {path: 'view>/authorization/showCommitment'}], formatter: '.formatter.authorizationText'}"/>
+                                    </Column>
                                 </columns>
                                 <items>
                                     <ColumnListItem highlight="{path: 'detail>isTotal', formatter: '.formatter.rowHighlight'}">
@@ -73,12 +76,14 @@
                                                 state="Success"/>
                                             <ObjectNumber
                                                 number="{path: 'detail>commitment', formatter: '.formatter.integer'}"
-                                                state="Information"/>
+                                                state="Information"
+                                                visible="{view>/authorization/showCommitment}"/>
                                             <ObjectNumber
-                                                number="{path: 'detail>billed', formatter: '.formatter.currency'}"
-                                                unit="R$"/>
-                                            <ObjectNumber number="{path: 'detail>monthlyPortfolio', formatter: '.formatter.currency'}" unit="R$"/>
-                                            <ObjectStatus text="{path: 'detail>achievement', formatter: '.formatter.percentage'}" state="{= ${detail>achievement} >= 1 ? 'Success' : 'Warning' }"/>
+                                                number="{path: 'detail>billed', formatter: '.formatter.integer'}"/>
+                                            <ObjectNumber number="{path: 'detail>monthlyPortfolio', formatter: '.formatter.integer'}"/>
+                                            <ObjectStatus
+                                                text="{parts: [{path: 'detail>achievementVsCommitment'}, {path: 'detail>achievementVsBudget'}, {path: 'view>/authorization/showCommitment'}], formatter: '.formatter.authorizationPercentage'}"
+                                                state="{parts: [{path: 'detail>achievementVsCommitment'}, {path: 'detail>achievementVsBudget'}, {path: 'view>/authorization/showCommitment'}], formatter: '.formatter.authorizationPercentageState'}"/>
                                         </cells>
                                     </ColumnListItem>
                                 </items>

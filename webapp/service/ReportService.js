@@ -52,6 +52,11 @@ sap.ui.define([], function () {
         var calculated = Object.assign({}, row);
         calculated.portfolioAndBilled = toNumber(row.monthlyPortfolio) + toNumber(row.billed);
         calculated.balance = calculated.portfolioAndBilled - toNumber(row.commitment);
+        calculated.balanceVsBudget = calculated.portfolioAndBilled - toNumber(row.budget);
+        calculated.achievementVsCommitment = toNumber(row.commitment) ?
+            calculated.portfolioAndBilled / toNumber(row.commitment) : 0;
+        calculated.achievementVsBudget = toNumber(row.budget) ?
+            calculated.portfolioAndBilled / toNumber(row.budget) : 0;
         calculated.achievement = toNumber(row.commitment) ?
             calculated.portfolioAndBilled / toNumber(row.commitment) : 0;
         calculated.managementOrder = calculated.management === "GNI" ? 2 : 1;
@@ -71,6 +76,7 @@ sap.ui.define([], function () {
             });
             result.portfolioAndBilled += toNumber(row.portfolioAndBilled);
             result.balance += toNumber(row.balance);
+            result.balanceVsBudget += toNumber(row.balanceVsBudget);
             return result;
         }, {
             id: "TOTAL",
@@ -81,10 +87,13 @@ sap.ui.define([], function () {
             monthlyPortfolio: 0,
             portfolioAndBilled: 0,
             balance: 0,
+            balanceVsBudget: 0,
             isTotal: true
         });
         total.management = "GNI";
         total.managementOrder = 2;
+        total.achievementVsCommitment = total.commitment ? total.portfolioAndBilled / total.commitment : 0;
+        total.achievementVsBudget = total.budget ? total.portfolioAndBilled / total.budget : 0;
         total.achievement = total.commitment ? total.portfolioAndBilled / total.commitment : 0;
         return total;
     }
